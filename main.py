@@ -32,8 +32,9 @@ def start(message):
     item3 = types.KeyboardButton('Лекции')
     item4 = types.KeyboardButton('Раписание экзаменов')
     item5 = types.KeyboardButton('Полезные ссылки')
+    item6 = types.KeyboardButton('Уведомления')
 
-    markup.add(item1, item2, item3, item4, item5)
+    markup.add(item1, item2, item3, item4, item5,item6)
 
     bot.send_message(message.chat.id, 'Доброго времени суток, {0.first_name}!'.format(message.from_user),
                      reply_markup=markup)
@@ -127,6 +128,13 @@ def bot_message(message):
             markup.add(item1, item2, item3, item4, item5)
 
             bot.send_message(message.chat.id, 'Назад', reply_markup=markup)
+
+
+        elif message.text == 'Уведомления':
+            markup = telebot.types.InlineKeyboardMarkup()
+            markup.add(telebot.types.InlineKeyboardButton(text='Включить', callback_data=3))
+            markup.add(telebot.types.InlineKeyboardButton(text='Отключить', callback_data=4))
+            bot.send_message(message.chat.id, text="Включить уведомления?", reply_markup=markup)
 
 
 bot.polling(none_stop=True)
